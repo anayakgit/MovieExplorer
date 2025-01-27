@@ -1,4 +1,4 @@
-#ABOUT
+#About
 
 MovieExplorer is a dynamic web-based movie recommendation and search system that allows users to search for trending and popular movies, explore their details, and get suggestions based on their queries. The app uses a Trie data structure to efficiently search through a list of movies and provides an interactive experience with detailed information, including release dates, genres, ratings, and more.
 
