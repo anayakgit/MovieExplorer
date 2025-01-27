@@ -1,0 +1,117 @@
+/* General styles for the body of the page */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Sets a modern, sans-serif font */
+    margin: 0; /* Removes default browser margin */
+    padding: 0; /* Removes default browser padding */
+    background-color: #121212; /* Dark background for a sleek look */
+    color: #ffffff; /* White text for better contrast */
+}
+
+/* Container that holds the main content */
+.container {
+    max-width: 700px; /* Limits the container's width for readability */
+    margin: 30px auto; /* Centers the container and adds vertical spacing */
+    padding: 20px; /* Adds internal spacing within the container */
+    text-align: center; /* Centers the text inside the container */
+    background: #1e1e1e; /* Dark gray background for contrast */
+    border-radius: 10px; /* Rounds the container's corners */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6); /* Adds a subtle shadow for depth */
+}
+
+/* Styling for the main heading */
+h1 {
+    font-size: 24px; /* Increases the font size */
+    margin-bottom: 20px; /* Adds space below the heading */
+    color: #f5c518; /* IMDb-like yellow color for emphasis */
+}
+
+/* Search bar input styles */
+#search-bar {
+    width: 600px; /* Sets the width of the search bar */
+    padding: 12px 15px; /* Adds space inside the input box */
+    font-size: 16px; /* Adjusts font size for better readability */
+    border: 1px solid #444; /* Adds a thin border in dark gray */
+    border-radius: 8px; /* Rounds the input box corners */
+    background-color: #282828; /* Dark background for the input box */
+    color: #fff; /* White text for better readability */
+    outline: none; /* Removes the default outline on focus */
+    transition: border-color 0.3s ease; /* Smooth transition for border-color change */
+}
+
+/* Search bar styles on focus */
+#search-bar:focus {
+    border-color: #f5c518; /* Changes the border to yellow when focused */
+}
+
+/* Suggestions dropdown container */
+.suggestions {
+    margin-top: 10px; /* Adds space above the suggestions box */
+    background: #1e1e1e; /* Matches the container's background */
+    border: 1px solid #444; /* Adds a border in dark gray */
+    border-radius: 8px; /* Rounds the corners */
+    max-height: 250px; /* Limits the height for scrollability */
+    overflow-y: auto; /* Adds a vertical scrollbar if needed */
+    color: #ffffff; /* White text for better contrast */
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.6); /* Adds a subtle shadow for depth */
+}
+
+/* Individual suggestion styles */
+.suggestions div {
+    padding: 10px 15px; /* Adds space inside each suggestion */
+    cursor: pointer; /* Changes the cursor to pointer for interactivity */
+    transition: background-color 0.2s ease, color 0.2s ease; /* Smooth transition for hover effects */
+}
+
+/* Hover effect for suggestions */
+.suggestions div:hover {
+    background-color: #f5c518; /* Highlights suggestion in yellow */
+    color: #000; /* Changes text color to black for better readability */
+}
+
+/* Highlighted suggestion (e.g., via keyboard navigation) */
+.suggestions div.highlight {
+    background: #f5c518; /* Matches hover background color */
+    color: #000; /* Matches hover text color */
+}
+
+/* Movie details section styles */
+.movie-details {
+    margin-top: 20px; /* Adds space above the section */
+    padding: 20px; /* Adds internal spacing */
+    background: #1e1e1e; /* Matches the container's background */
+    border: 1px solid #444; /* Adds a border in dark gray */
+    border-radius: 10px; /* Rounds the corners */
+    text-align: left; /* Aligns the text to the left */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6); /* Adds a subtle shadow for depth */
+    justify-content: center; /* Centers the content horizontally */
+}
+
+/* Styling for movie title */
+.movie-details h2 {
+    font-size: 22px; /* Slightly larger font size for the title */
+    margin-bottom: 10px; /* Adds space below the title */
+    color: #f5c518; /* Highlights the title in yellow */
+}
+
+/* Styling for movie description paragraphs */
+.movie-details p {
+    font-size: 16px; /* Adjusts font size for readability */
+    margin: 8px 0; /* Adds space between paragraphs */
+}
+
+/* Styling for movie poster images */
+.movie-details img {
+    max-width: 100%; /* Ensures the image doesn't overflow */
+    height: auto; /* Maintains the aspect ratio */
+    border-radius: 10px; /* Rounds the image corners */
+    margin-top: 10px; /* Adds space above the image */
+    justify-content: center; /* Centers the image horizontally */
+}
+
+/* Error message styles */
+.error-message {
+    color: #ff4d4d; /* Red color to indicate errors */
+    font-weight: bold; /* Makes the text bold */
+    margin-top: 10px; /* Adds space above the message */
+    text-align: center; /* Centers the text */
+}
