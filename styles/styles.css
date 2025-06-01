@@ -1,117 +1,305 @@
-/* General styles for the body of the page */
+/* Root variables for vibrant theming */
+:root {
+  --primary-color: #ff6f61; /* Coral for accents */
+  --secondary-color: #6b46c1; /* Purple for secondary elements */
+  --background-color: #f7fafc; /* Light gray-blue */
+  --card-bg: #ffffff; /* White for cards */
+  --text-color: #1a202c; /* Dark gray for text */
+  --border-color: #e2e8f0; /* Light border */
+  --success-color: #38b2ac; /* Teal for Like button */
+  --success-hover: #319795;
+  --accent-color: #f6ad55; /* Orange for highlights */
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.15);
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --border-radius: 12px;
+  --transition: all 0.3s ease-in-out;
+  --gradient-bg: linear-gradient(135deg, #e6fffa, #e9d8fd);
+}
+
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Sets a modern, sans-serif font */
-    margin: 0; /* Removes default browser margin */
-    padding: 0; /* Removes default browser padding */
-    background-color: #121212; /* Dark background for a sleek look */
-    color: #ffffff; /* White text for better contrast */
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--gradient-bg);
+  color: var(--text-color);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-/* Container that holds the main content */
-.container {
-    max-width: 700px; /* Limits the container's width for readability */
-    margin: 30px auto; /* Centers the container and adds vertical spacing */
-    padding: 20px; /* Adds internal spacing within the container */
-    text-align: center; /* Centers the text inside the container */
-    background: #1e1e1e; /* Dark gray background for contrast */
-    border-radius: 10px; /* Rounds the container's corners */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6); /* Adds a subtle shadow for depth */
+/* App container */
+.app-container {
+  display: flex;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
 }
 
-/* Styling for the main heading */
+/* Left panel (fixed) */
+.left-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 100vh;
+  background: var(--card-bg);
+  padding: var(--spacing-lg);
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.left-panel::-webkit-scrollbar {
+  width: 6px;
+}
+
+.left-panel::-webkit-scrollbar-track {
+  background: var(--background-color);
+}
+
+.left-panel::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: var(--border-radius);
+}
+
+/* Right panel (scrollable) */
+.right-panel {
+  margin-left: 420px;
+  flex: 1;
+  padding: var(--spacing-lg);
+  background: var(--background-color);
+  min-height: 100vh;
+}
+
+/* Headings */
 h1 {
-    font-size: 24px; /* Increases the font size */
-    margin-bottom: 20px; /* Adds space below the heading */
-    color: #f5c518; /* IMDb-like yellow color for emphasis */
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  font-weight: 700;
+  background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-/* Search bar input styles */
+h2 {
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+/* Search container */
+.search-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
 #search-bar {
-    width: 600px; /* Sets the width of the search bar */
-    padding: 12px 15px; /* Adds space inside the input box */
-    font-size: 16px; /* Adjusts font size for better readability */
-    border: 1px solid #444; /* Adds a thin border in dark gray */
-    border-radius: 8px; /* Rounds the input box corners */
-    background-color: #282828; /* Dark background for the input box */
-    color: #fff; /* White text for better readability */
-    outline: none; /* Removes the default outline on focus */
-    transition: border-color 0.3s ease; /* Smooth transition for border-color change */
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius);
+  outline: none;
+  transition: var(--transition);
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
 }
 
-/* Search bar styles on focus */
 #search-bar:focus {
-    border-color: #f5c518; /* Changes the border to yellow when focused */
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(255, 111, 97, 0.2);
 }
 
-/* Suggestions dropdown container */
+/* Suggestions dropdown */
 .suggestions {
-    margin-top: 10px; /* Adds space above the suggestions box */
-    background: #1e1e1e; /* Matches the container's background */
-    border: 1px solid #444; /* Adds a border in dark gray */
-    border-radius: 8px; /* Rounds the corners */
-    max-height: 250px; /* Limits the height for scrollability */
-    overflow-y: auto; /* Adds a vertical scrollbar if needed */
-    color: #ffffff; /* White text for better contrast */
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.6); /* Adds a subtle shadow for depth */
+  border: 1px solid var(--border-color);
+  max-height: 200px;
+  overflow-y: auto;
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Individual suggestion styles */
 .suggestions div {
-    padding: 10px 15px; /* Adds space inside each suggestion */
-    cursor: pointer; /* Changes the cursor to pointer for interactivity */
-    transition: background-color 0.2s ease, color 0.2s ease; /* Smooth transition for hover effects */
+  padding: var(--spacing-sm) var(--spacing-md);
+  cursor: pointer;
+  transition: var(--transition);
 }
 
-/* Hover effect for suggestions */
 .suggestions div:hover {
-    background-color: #f5c518; /* Highlights suggestion in yellow */
-    color: #000; /* Changes text color to black for better readability */
+  background: var(--accent-color);
+  color: var(--text-color);
 }
 
-/* Highlighted suggestion (e.g., via keyboard navigation) */
-.suggestions div.highlight {
-    background: #f5c518; /* Matches hover background color */
-    color: #000; /* Matches hover text color */
+.suggestions div:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: -2px;
 }
 
-/* Movie details section styles */
+.suggestions::-webkit-scrollbar {
+  width: 6px;
+}
+
+.suggestions::-webkit-scrollbar-track {
+  background: var(--background-color);
+}
+
+.suggestions::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: var(--border-radius);
+}
+
+/* Liked movies */
+.liked-movies {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: var(--spacing-sm);
+}
+
+.liked-movie-item {
+  background: var(--card-bg);
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius);
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.liked-movie-item:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-hover);
+}
+
+.liked-movie-item img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-xs);
+}
+
+.liked-movie-item p {
+  font-size: 0.85rem;
+  color: var(--text-color);
+  margin: 0;
+}
+
+/* Movie details */
 .movie-details {
-    margin-top: 20px; /* Adds space above the section */
-    padding: 20px; /* Adds internal spacing */
-    background: #1e1e1e; /* Matches the container's background */
-    border: 1px solid #444; /* Adds a border in dark gray */
-    border-radius: 10px; /* Rounds the corners */
-    text-align: left; /* Aligns the text to the left */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6); /* Adds a subtle shadow for depth */
-    justify-content: center; /* Centers the content horizontally */
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+  animation: slideInRight 0.5s ease-out;
 }
 
-/* Styling for movie title */
 .movie-details h2 {
-    font-size: 22px; /* Slightly larger font size for the title */
-    margin-bottom: 10px; /* Adds space below the title */
-    color: #f5c518; /* Highlights the title in yellow */
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-/* Styling for movie description paragraphs */
-.movie-details p {
-    font-size: 16px; /* Adjusts font size for readability */
-    margin: 8px 0; /* Adds space between paragraphs */
-}
-
-/* Styling for movie poster images */
 .movie-details img {
-    max-width: 100%; /* Ensures the image doesn't overflow */
-    height: auto; /* Maintains the aspect ratio */
-    border-radius: 10px; /* Rounds the image corners */
-    margin-top: 10px; /* Adds space above the image */
-    justify-content: center; /* Centers the image horizontally */
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--border-radius);
+  margin: var(--spacing-md) 0;
+  box-shadow: var(--shadow);
 }
 
-/* Error message styles */
-.error-message {
-    color: #ff4d4d; /* Red color to indicate errors */
-    font-weight: bold; /* Makes the text bold */
-    margin-top: 10px; /* Adds space above the message */
-    text-align: center; /* Centers the text */
+.movie-details p {
+  margin: var(--spacing-sm) 0;
+}
+
+.movie-details button {
+  background: var(--success-color);
+  color: #fff;
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.movie-details button:hover {
+  background: var(--success-hover);
+  transform: scale(1.05);
+}
+
+.movie-details button:focus {
+  outline: 2px solid var(--success-color);
+  outline-offset: 2px;
+}
+
+.movie-details button:active {
+  transform: scale(1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+  }
+
+  .left-panel {
+    position: static;
+    width: 100%;
+    height: auto;
+    box-shadow: none;
+  }
+
+  .right-panel {
+    margin-left: 0;
+    padding: var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: clamp(1.5rem, 4vw, 1.8rem);
+  }
+
+  h2 {
+    font-size: clamp(1.2rem, 3vw, 1.4rem);
+  }
+
+  .liked-movies {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+
+  .movie-details button {
+    width: 100%;
+    justify-content: center;
+  }
 }

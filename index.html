@@ -1,41 +1,27 @@
 <!DOCTYPE html>
-<!-- Declares the document type and specifies this is an HTML5 document -->
 <html lang="en">
-<!-- Root element of the HTML document, with the primary language set to English -->
 <head>
-  <!-- Metadata section of the document -->
   <meta charset="UTF-8">
-  <!-- Specifies the character encoding to UTF-8 to support a wide range of characters -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Makes the page responsive by adju  sting to the device's screen width -->
-  <title>Movie Recommendation System</title>
-  <!-- Title of the document that appears in the browser tab -->
+  <title>Movie Explorer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/styles.css">
-  <!-- Links an external CSS file for styling the page -->
 </head>
 <body>
-  <!-- Main content of the document -->
-  <div class="container">
-    <!-- A container div for styling and structuring the content -->
-    <h1>Movie Search</h1>
-    <!-- A heading for the application -->
-    <input type="text" id="search-bar" placeholder="Search for a movie..." autocomplete="off">
-    <!-- Input field for the user to type their movie query -->
-    <!-- `id="search-bar"`: Used for JavaScript to target this element -->
-    <!-- `placeholder`: Text displayed as a hint inside the input field -->
-    <!-- `autocomplete="off"`: Disables browser's autocomplete suggestions -->
-    <div id="suggestions" class="suggestions"></div>
-    <!-- Div to display movie suggestions fetched from the Trie or API -->
-    <!-- `id="suggestions"`: Used for dynamically inserting suggestions -->
-    <!-- `class="suggestions"`: For CSS styling -->
-    <div id="movie-details" class="movie-details"></div>
-    <!-- Div to display detailed information about the selected movie -->
-    <!-- `id="movie-details"`: Used for dynamically inserting movie details -->
-    <!-- `class="movie-details"`: For CSS styling -->
+  <div class="app-container">
+    <div class="left-panel">
+      <h1>Movie Explorer</h1>
+      <div class="search-container">
+        <input type="text" id="search-bar" placeholder="Search for a movie..." autocomplete="off">
+        <div id="suggestions" class="suggestions"></div>
+      </div>
+      <h2>Liked Movies</h2>
+      <div id="liked-movies" class="liked-movies"></div>
+    </div>
+    <div class="right-panel">
+      <div id="movie-details" class="movie-details"></div>
+    </div>
   </div>
-
-  <script type="module" src="scripts/script.js"></script>
-  <!-- Links the external JavaScript file for functionality -->
-  <!-- `type="module"`: Allows usage of ES6 modules and imports -->
+  <script src="scripts/script.js"></script>
 </body>
 </html>
