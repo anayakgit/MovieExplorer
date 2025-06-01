@@ -1,5 +1,9 @@
 # Use official Node.js LTS version image
-FROM node:18
+FROM node:18-alpine
+
+# Create app directory and set non-root user
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S nextjs -u 1001
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -8,12 +12,15 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install Node.js dependencies
-RUN npm install
+RUN npm ci --only=production
 
 # Copy the entire project files into the container
-COPY . .
+COPY --chown=nextjs:nodejs . .
 
-# Expose the port your app runs on (change if needed)
+# Switch to non-root user
+USER nextjs
+
+# Expose the port your app runs on
 EXPOSE 3000
 
 # Start the app
