@@ -7,7 +7,12 @@ const port = 3000;
 require('dotenv').config();
 
 // Middleware
-app.use(cors()); // Allow cross-origin requests from frontend
+const corsOptions = {
+ origin: ['http://localhost:3000', 'http://127.0.0.1:5500', 'http://localhost:5500'],
+ credentials: true,
+ optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions)); // Secure CORS configuration
 app.use(express.json()); // Parse JSON bodies
 
 // MongoDB Atlas connection
