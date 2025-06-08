@@ -67,7 +67,7 @@ app.get('/api/movies/liked/:userId', async (req, res) => {
 });
 
 // Serve frontend index.html for client-side routes
-app.get('/*', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
