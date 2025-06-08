@@ -15,6 +15,10 @@ const corsOptions = {
 app.use(cors(corsOptions)); // Secure CORS configuration
 app.use(express.json()); // Parse JSON bodies
 
+
+app.use(express.static('public'));
+
+
 // MongoDB Atlas connection
 const mongoURI = process.env.MONGO_URI;
 
