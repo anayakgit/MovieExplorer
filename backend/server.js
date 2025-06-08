@@ -8,6 +8,12 @@ const app = express();
 app.disable('x-powered-by');
 const port = process.env.PORT || 3000;
 
+// Log all requests (for debugging)
+app.use((req, res, next) => {
+  console.log('Incoming request:', req.method, req.url);
+  next();
+});
+
 // CORS setup
 const corsOptions = {
   origin: ['http://localhost:3000', 'http://127.0.0.1:5500', 'http://localhost:5500'],
@@ -60,8 +66,8 @@ app.get('/api/movies/liked/:userId', async (req, res) => {
   }
 });
 
-// Optional: serve index.html for client-side routing
-app.get('*', (req, res) => {
+// Serve frontend index.html for client-side routes
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
