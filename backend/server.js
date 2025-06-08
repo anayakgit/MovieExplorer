@@ -1,68 +1,71 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const app = express();
-app.disable('x-powered-by'); // Hide Express version information
-const port = 3000;
+const path = require('path');
 require('dotenv').config();
 
-// Middleware
+const app = express();
+app.disable('x-powered-by');
+const port = process.env.PORT || 3000;
+
+// CORS setup
 const corsOptions = {
- origin: ['http://localhost:3000', 'http://127.0.0.1:5500', 'http://localhost:5500'],
- credentials: true,
- optionsSuccessStatus: 200
+  origin: ['http://localhost:3000', 'http://127.0.0.1:5500', 'http://localhost:5500'],
+  credentials: true,
+  optionsSuccessStatus: 200
 };
-app.use(cors(corsOptions)); // Secure CORS configuration
-app.use(express.json()); // Parse JSON bodies
+app.use(cors(corsOptions));
+app.use(express.json());
 
+// Serve static frontend
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(express.static('public'));
-
-
-// MongoDB Atlas connection
+// MongoDB connection
 const mongoURI = process.env.MONGO_URI;
-
 mongoose.connect(mongoURI)
- .then(() => console.log('Connected to MongoDB Atlas'))
- .catch(err => console.error('MongoDB connection error:', err));
+  .then(() => console.log('Connected to MongoDB Atlas'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
-// Define Movie schema
+// Schema and model
 const movieSchema = new mongoose.Schema({
- userId: { type: String, required: true },
- movieId: { type: Number, required: true },
- title: { type: String, required: true },
- releaseDate: { type: String },
- posterPath: { type: String },
+  userId: { type: String, required: true },
+  movieId: { type: Number, required: true },
+  title: { type: String, required: true },
+  releaseDate: { type: String },
+  posterPath: { type: String },
 });
 const Movie = mongoose.model('Movie', movieSchema);
 
-// API Endpoints
-// Save a liked movie
+// API endpoints
 app.post('/api/movies/like', async (req, res) => {
- try {
-   const { userId, movieId, title, releaseDate, posterPath } = req.body;
-   const movie = new Movie({ userId, movieId, title, releaseDate, posterPath });
-   await movie.save();
-   res.status(201).json({ message: 'Movie liked successfully' });
- } catch (error) {
-   console.error('Error saving liked movie:', error);
-   res.status(500).json({ error: 'Failed to save liked movie' });
- }
+  try {
+    const { userId, movieId, title, releaseDate, posterPath } = req.body;
+    const movie = new Movie({ userId, movieId, title, releaseDate, posterPath });
+    await movie.save();
+    res.status(201).json({ message: 'Movie liked successfully' });
+  } catch (error) {
+    console.error('Error saving liked movie:', error);
+    res.status(500).json({ error: 'Failed to save liked movie' });
+  }
 });
 
-// Get all liked movies for a user
 app.get('/api/movies/liked/:userId', async (req, res) => {
- try {
-   const { userId } = req.params;
-   const movies = await Movie.find({ userId });
-   res.json(movies);
- } catch (error) {
-   console.error('Error fetching liked movies:', error);
-   res.status(500).json({ error: 'Failed to fetch liked movies' });
- }
+  try {
+    const { userId } = req.params;
+    const movies = await Movie.find({ userId });
+    res.json(movies);
+  } catch (error) {
+    console.error('Error fetching liked movies:', error);
+    res.status(500).json({ error: 'Failed to fetch liked movies' });
+  }
+});
+
+// Optional: serve index.html for client-side routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Start server
 app.listen(port, () => {
- console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server running at http://localhost:${port}`);
 });
