@@ -9,27 +9,29 @@ app.disable('x-powered-by');
 
 const port = process.env.PORT || 3000;
 
-// Log incoming requests (helpful for debugging on Render)
+// Log all requests (for debugging)
 app.use((req, res, next) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
   next();
 });
 
-// Adjust CORS for your deployed frontend domain
+// CORS setup — allow localhost and deployed frontend
 const corsOptions = {
   origin: [
-    'http://localhost:3000', 
-    'http://127.0.0.1:5500', 
+    'http://localhost:3000',
+    'http://127.0.0.1:5500',
     'http://localhost:5500',
-    'https://movieexplorer-uetc.onrender.com/'  // <-- Add your frontend deployed domain here
+    'https://movieexplorer-uetc.onrender.com'  // deployed frontend URL (NO trailing slash)
   ],
   credentials: true,
   optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
+
+// Parse JSON body
 app.use(express.json());
 
-// Serve static frontend assets
+// Serve static frontend files from 'public'
 app.use(express.static(path.join(__dirname, 'public')));
 
 // MongoDB connection
@@ -37,7 +39,7 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('Connected to MongoDB Atlas'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-// Movie Schema
+// Movie schema & model
 const movieSchema = new mongoose.Schema({
   userId: { type: String, required: true },
   movieId: { type: Number, required: true },
@@ -71,12 +73,12 @@ app.get('/api/movies/liked/:userId', async (req, res) => {
   }
 });
 
-// Fallback to index.html for client-side routing
+// Fallback to serve frontend index.html for any other route (for client-side routing)
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Start server on Render port or 3000 locally
+// Start server
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
