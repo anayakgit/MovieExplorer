@@ -6,6 +6,11 @@ const apiKey = '47d4888f9bb27a01416321f91aa31a22'; // Your TMDB API key
 const userId = 'user123'; // Hardcoded for demo; replace with dynamic user ID if needed
 let debounceTimer;
 
+// Auto-detect API base URL based on environment
+const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? 'http://localhost:3000'  // Local development
+  : 'https://movieexplorer-uetc.onrender.com';  // Replace with your actual Render backend URL
+
 // Fetch movie suggestions from TMDB API
 async function fetchMovieSuggestions(query) {
   try {
@@ -62,25 +67,34 @@ function displayMovieDetails(movie) {
 // Like a movie and save to backend
 async function likeMovie(movieId, title, releaseDate, posterPath) {
   try {
-    const response = await fetch('http://localhost:3000/api/movies/like', {
+    console.log('Making request to:', `${API_BASE_URL}/api/movies/like`); // Debug log
+    const response = await fetch(`${API_BASE_URL}/api/movies/like`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ userId, movieId, title, releaseDate, posterPath })
     });
-    if (!response.ok) throw new Error('Failed to like movie');
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to like movie: ${response.status} - ${errorText}`);
+    }
     const data = await response.json();
     console.log(data.message);
     fetchLikedMovies(); // Refresh liked movies
   } catch (error) {
     console.error('Error liking movie:', error);
+    alert('Failed to like movie. Please try again.'); // User feedback
   }
 }
 
 // Fetch and display liked movies
 async function fetchLikedMovies() {
   try {
-    const response = await fetch(`http://localhost:3000/api/movies/liked/${userId}`);
-    if (!response.ok) throw new Error('Failed to fetch liked movies');
+    console.log('Making request to:', `${API_BASE_URL}/api/movies/liked/${userId}`); // Debug log
+    const response = await fetch(`${API_BASE_URL}/api/movies/liked/${userId}`);
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to fetch liked movies: ${response.status} - ${errorText}`);
+    }
     const movies = await response.json();
     displayLikedMovies(movies);
   } catch (error) {

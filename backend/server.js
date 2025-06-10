@@ -21,7 +21,8 @@ const corsOptions = {
     'http://localhost:3000',
     'http://127.0.0.1:5500',
     'http://localhost:5500',
-    'https://movieexplorer-uetc.onrender.com'  // deployed frontend URL (NO trailing slash)
+    'https://movieexplorer-uetc.onrender.com', 
+    'https://movieexplorer-latest.onrender.com'  // deployed frontend URL (NO trailing slash)
   ],
   credentials: true,
   optionsSuccessStatus: 200
