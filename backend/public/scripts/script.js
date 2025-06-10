@@ -7,9 +7,22 @@ const userId = 'user123'; // Hardcoded for demo; replace with dynamic user ID if
 let debounceTimer;
 
 // Auto-detect API base URL based on environment
-const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-  ? 'http://localhost:3000'  // Local development
-  : 'https://movieexplorer-uetc.onrender.com';  // Replace with your actual Render backend URL
+const API_BASE_URL = (() => {
+  const hostname = window.location.hostname;
+  
+  // Local development
+  if (hostname === 'localhost' || hostname === '127.0.0.1') {
+    return 'http://localhost:3000';
+  }
+  
+  // Production environments
+  if (hostname.includes('movieexplorer-latest')) {
+    return 'https://movieexplorer-latest.onrender.com';
+  }
+  
+  // Default production URL
+  return 'https://movieexplorer-uetc.onrender.com';
+})(); // Replace with your actual Render backend URL
 
 // Fetch movie suggestions from TMDB API
 async function fetchMovieSuggestions(query) {
