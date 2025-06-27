@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Liked Movies - Movie Explorer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/styles.css">
+  <link rel="stylesheet" href="styles/liked-movies.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-title">Movie Explorer</a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <!-- <a href="liked-movies.html" class="nav-link active">My Movies</a> -->
+        <div class="user-info">
+          <span id="username-display"></span>
+          <button id="logout-btn" class="logout-btn">Logout</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="liked-movies-container">
+    <div class="header-section">
+      <h1>My Liked Movies</h1>
+      <p id="movies-count">Loading your collection...</p>
+    </div>
+
+    <!-- Filter and Sort Options -->
+    <div class="controls-section">
+      <div class="search-filter">
+        <input type="text" id="filter-search" placeholder="Filter your movies..." autocomplete="off">
+      </div>
+      <div class="sort-options">
+        <select id="sort-select">
+          <option value="title-asc">Title (A-Z)</option>
+          <option value="title-desc">Title (Z-A)</option>
+          <option value="date-desc">Recently Added</option>
+          <option value="date-asc">Oldest First</option>
+          <option value="release-desc">Release Date (Newest)</option>
+          <option value="release-asc">Release Date (Oldest)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Movies Grid -->
+    <div id="movies-grid" class="movies-grid">
+      <div class="loading-message">
+        <p>Loading your liked movies...</p>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div id="empty-state" class="empty-state" style="display: none;">
+      <h2>No movies in your collection yet</h2>
+      <p>Start exploring and liking movies to build your personal collection!</p>
+      <a href="index.html" class="cta-button">Explore Movies</a>
+    </div>
+  </div>
+
+  <!-- Movie Details Modal -->
+  <div id="movie-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <div id="modal-movie-details"></div>
+    </div>
+  </div>
+
+  <script src="scripts/liked-movies.js"></script>
+</body>
+</html>

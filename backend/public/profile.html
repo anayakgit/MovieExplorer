@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - Movie Explorer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="index.html" class="title-main">Movie Explorer</a>
+    <div style="display: flex; gap: 1rem; align-items: center;">
+      <a href="index.html" class="profile-btn">Home</a>
+      <a href="liked-movies.html" class="profile-btn">Liked Movies</a>
+      <span id="user-greeting" style="color: var(--secondary-color); font-weight: 500;"></span>
+      <button id="logout-btn" style="background: var(--primary-color); color: white; border: none; padding: 0.5rem 1rem; border-radius: var(--border-radius); cursor: pointer; font-weight: 500;">Logout</button>
+    </div>
+  </nav>
+
+  <div class="auth-container" style="margin-top: var(--navbar-height);">
+    <div class="auth-card" style="max-width: 600px;">
+      <div class="auth-header">
+        <h1>My Profile</h1>
+        <p>Manage your account settings and information</p>
+      </div>
+
+      <!-- Profile Info Section -->
+      <div style="margin-bottom: var(--spacing-lg);">
+        <h2 style="margin-bottom: var(--spacing-md); color: var(--text-color);">Account Information</h2>
+        <div style="background: var(--background-color); padding: var(--spacing-lg); border-radius: var(--border-radius); margin-bottom: var(--spacing-md);">
+          <div style="display: grid; gap: var(--spacing-md);">
+            <div>
+              <label style="font-weight: 500; color: var(--text-color); display: block; margin-bottom: 0.5rem;">Username</label>
+              <div style="padding: var(--spacing-sm) var(--spacing-md); background: var(--card-bg); border: 2px solid var(--border-color); border-radius: var(--border-radius); font-size: 1rem;" id="profile-username">Loading...</div>
+            </div>
+            <div>
+              <label style="font-weight: 500; color: var(--text-color); display: block; margin-bottom: 0.5rem;">Email</label>
+              <div style="padding: var(--spacing-sm) var(--spacing-md); background: var(--card-bg); border: 2px solid var(--border-color); border-radius: var(--border-radius); font-size: 1rem;" id="profile-email">Loading...</div>
+            </div>
+            <div>
+              <label style="font-weight: 500; color: var(--text-color); display: block; margin-bottom: 0.5rem;">Member Since</label>
+              <div style="padding: var(--spacing-sm) var(--spacing-md); background: var(--card-bg); border: 2px solid var(--border-color); border-radius: var(--border-radius); font-size: 1rem;" id="profile-created">Loading...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Movie Statistics -->
+      <div style="margin-bottom: var(--spacing-lg);">
+        <h2 style="margin-bottom: var(--spacing-md); color: var(--text-color);">Movie Statistics</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--spacing-md);">
+          <div style="background: linear-gradient(135deg, var(--success-color), var(--success-hover)); color: white; padding: var(--spacing-lg); border-radius: var(--border-radius); text-align: center; box-shadow: var(--shadow);">
+            <div style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;" id="total-liked">0</div>
+            <div style="font-size: 0.9rem; opacity: 0.9;">Movies Liked</div>
+          </div>
+          <div style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; padding: var(--spacing-lg); border-radius: var(--border-radius); text-align: center; box-shadow: var(--shadow);">
+            <div style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;" id="recent-activity">0</div>
+            <div style="font-size: 0.9rem; opacity: 0.9;">This Month</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Liked Movies -->
+      <div style="margin-bottom: var(--spacing-lg);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-md);">
+          <h2 style="color: var(--text-color);">Recent Liked Movies</h2>
+          <a href="liked-movies.html" class="view-all-link">View All</a>
+        </div>
+        <div id="recent-movies" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: var(--spacing-sm);">
+          <div style="text-align: center; color: var(--text-color); opacity: 0.7; padding: var(--spacing-lg);">
+            Loading your recent movies...
+          </div>
+        </div>
+      </div>
+
+      <!-- Change Password Section -->
+      <div style="margin-bottom: var(--spacing-lg);">
+        <h2 style="margin-bottom: var(--spacing-md); color: var(--text-color);">Change Password</h2>
+        <form id="change-password-form" class="auth-form">
+          <div class="form-group">
+            <label for="current-password">Current Password</label>
+            <input type="password" id="current-password" placeholder="Enter current password" required>
+          </div>
+          <div class="form-group">
+            <label for="new-password">New Password</label>
+            <input type="password" id="new-password" placeholder="Enter new password" minlength="6" required>
+          </div>
+          <div class="form-group">
+            <label for="confirm-password">Confirm New Password</label>
+            <input type="password" id="confirm-password" placeholder="Confirm new password" minlength="6" required>
+          </div>
+          <button type="submit" class="auth-button">Update Password</button>
+          <div id="password-error" class="error-message"></div>
+          <div id="password-success" style="color: var(--success-color); font-size: 0.9rem; text-align: center; margin-top: var(--spacing-sm); min-height: 1.5rem;"></div>
+        </form>
+      </div>
+
+      <!-- Account Actions -->
+      <div style="border-top: 1px solid var(--border-color); padding-top: var(--spacing-lg);">
+        <h2 style="margin-bottom: var(--spacing-md); color: var(--text-color);">Account Actions</h2>
+        <div style="display: flex; gap: var(--spacing-md); flex-wrap: wrap;">
+          <button id="export-data-btn" style="background: var(--accent-color); color: white; border: none; padding: var(--spacing-sm) var(--spacing-lg); border-radius: var(--border-radius); cursor: pointer; font-weight: 500; transition: var(--transition);">
+            Export My Data
+          </button>
+          <button id="clear-liked-btn" style="background: #ff4757; color: white; border: none; padding: var(--spacing-sm) var(--spacing-lg); border-radius: var(--border-radius); cursor: pointer; font-weight: 500; transition: var(--transition);">
+            Clear All Liked Movies
+          </button>
+        </div>
+        <div id="action-message" style="color: var(--success-color); font-size: 0.9rem; margin-top: var(--spacing-sm); min-height: 1.5rem;"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts/profile.js"></script>
+</body>
+</html>

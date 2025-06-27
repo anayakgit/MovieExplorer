@@ -8,20 +8,38 @@
   <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-  <div class="app-container">
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="index.html" class="title-main">Movie Explorer</a>
+    <div class="user-info">
+      <span id="username-display"></span>
+      <a href="profile.html" class="profile-btn">Profile</a>
+      <button id="logout-btn" class="unlike-btn">Logout</button>
+    </div>
+  </nav>
+  <!-- Main App -->
+  <div id="app" class="app-container">
     <div class="left-panel">
-      <h1>Movie Explorer</h1>
       <div class="search-container">
         <input type="text" id="search-bar" placeholder="Search for a movie..." autocomplete="off">
         <div id="suggestions" class="suggestions"></div>
       </div>
-      <h2>Liked Movies</h2>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h2>Your Liked Movies</h2>
+        <a href="liked-movies.html" class="view-all-link">View All</a>
+      </div>
       <div id="liked-movies" class="liked-movies"></div>
     </div>
     <div class="right-panel">
-      <div id="movie-details" class="movie-details"></div>
+      <div id="movie-details" class="movie-details">
+        <div class="welcome-message">
+          <h2>Welcome to Movie Explorer!</h2>
+          <p>Search for movies using the search bar on the left to get started. You can like movies and they'll appear in your personal collection.</p>
+        </div>
+      </div>
     </div>
   </div>
-  <script src="scripts/script.js"></script>
+
+  <script src="scripts/index.js"></script>
 </body>
 </html>

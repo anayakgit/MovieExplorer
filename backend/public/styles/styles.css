@@ -18,6 +18,7 @@
   --border-radius: 12px;
   --transition: all 0.3s ease-in-out;
   --gradient-bg: linear-gradient(135deg, #e6fffa, #e9d8fd);
+  --navbar-height: 70px; /* Height of the navbar */
 }
 
 /* Reset and base styles */
@@ -36,22 +37,38 @@ body {
   overflow-x: hidden;
 }
 
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--navbar-height);
+  background: var(--card-bg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--spacing-lg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
 /* App container */
 .app-container {
   display: flex;
   width: 100%;
   max-width: 1400px;
-  margin: 0 auto;
-  min-height: 100vh;
+  margin: var(--navbar-height) auto 0;
+  min-height: calc(100vh - var(--navbar-height));
 }
 
 /* Left panel (fixed) */
 .left-panel {
   position: fixed;
-  top: 0;
+  top: var(--navbar-height);
   left: 0;
   width: 400px;
-  height: 100vh;
+  height: calc(100vh - var(--navbar-height));
   background: var(--card-bg);
   padding: var(--spacing-lg);
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
@@ -80,11 +97,11 @@ body {
   flex: 1;
   padding: var(--spacing-lg);
   background: var(--background-color);
-  min-height: 100vh;
+  min-height: calc(100vh - var(--navbar-height));
 }
 
 /* Headings */
-h1 {
+.title-main{
   font-size: clamp(2rem, 5vw, 2.5rem);
   font-weight: 700;
   background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
@@ -266,6 +283,155 @@ h2 {
   to { opacity: 1; transform: translateX(0); }
 }
 
+/* Authentication container */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: var(--spacing-md);
+  background: var(--gradient-bg);
+}
+
+/* Authentication card */
+.auth-card {
+  background: var(--card-bg);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 450px;
+  transition: var(--transition);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.auth-card:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+/* Authentication header */
+.auth-header {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.auth-header h1 {
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  font-weight: 700;
+  background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.auth-header h2 {
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.auth-header p {
+  font-size: 1rem;
+  color: var(--text-color);
+  opacity: 0.8;
+  margin-top: var(--spacing-xs);
+}
+
+/* Authentication form */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.form-group input {
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius);
+  outline: none;
+  transition: var(--transition);
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+}
+
+.form-group input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(255, 111, 97, 0.2);
+}
+
+/* Authentication button */
+.auth-button {
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: var(--transition);
+  text-align: center;
+}
+
+.auth-button:hover {
+  background: var(--secondary-color);
+  transform: scale(1.05);
+}
+
+.auth-button:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.auth-button:active {
+  transform: scale(1);
+}
+
+/* Error message */
+.error-message {
+  color: var(--primary-color);
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: var(--spacing-sm);
+  min-height: 1.5rem;
+}
+
+/* Authentication footer */
+.auth-footer {
+  text-align: center;
+  margin-top: var(--spacing-lg);
+}
+
+.auth-footer p {
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+.auth-footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.auth-footer a:hover {
+  color: var(--secondary-color);
+  text-decoration: underline;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .app-container {
@@ -283,9 +449,25 @@ h2 {
     margin-left: 0;
     padding: var(--spacing-md);
   }
+
+  .auth-card {
+    padding: var(--spacing-md);
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    height: auto;
+  }
+
+  .navbar h1 {
+    margin-bottom: var(--spacing-xs);
+  }
+
   h1 {
     font-size: clamp(1.5rem, 4vw, 1.8rem);
   }
@@ -302,4 +484,55 @@ h2 {
     width: 100%;
     justify-content: center;
   }
+
+  .auth-button {
+    width: 100%;
+  }
+
+  .auth-header h1 {
+    font-size: clamp(1.5rem, 4vw, 1.8rem);
+  }
+
+  .auth-header h2 {
+    font-size: clamp(1.2rem, 3vw, 1.4rem);
+  }
+}
+
+.view-all-link {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+
+.view-all-link:hover {
+  background: rgba(102, 126, 234, 0.1);
+}
+
+.unlike-btn {
+  background: #ff4757;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.unlike-btn:hover {
+  background: #971e28;
+}
+
+.profile-btn{
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s ease;
 }
