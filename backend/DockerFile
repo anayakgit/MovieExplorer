@@ -1,27 +1,35 @@
 # Use official Node.js LTS version image
 FROM node:18-alpine
 
-# Create app directory and set non-root user
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nextjs -u 1001
-
-# Set the working directory inside the container
+# Create app directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy package.json and package-lock.json first (for better caching)
 COPY package*.json ./
 
-# Install Node.js dependencies
-RUN npm ci --only=production
+# Install ALL dependencies (not just production)
+# This ensures bcryptjs and all required packages are installed
+RUN npm ci
 
-# Copy the entire project files into the container
-COPY --chown=nextjs:nodejs . .
+# Copy the rest of the application code
+COPY . .
+
+# Create non-root user (optional, but good practice)
+RUN addgroup -g 1001 -S appgroup && \
+    adduser -S appuser -u 1001 -G appgroup
+
+# Change ownership of the app directory
+RUN chown -R appuser:appgroup /app
 
 # Switch to non-root user
-USER nextjs
+USER appuser
 
-# Expose the port your app runs on
-EXPOSE 3000
+# Expose the port your backend runs on (change this to match your server.js port)
+EXPOSE 5000
 
-# Start the app
+# Health check (optional)
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD node healthcheck.js || exit 1
+
+# Start the application
 CMD ["npm", "start"]
